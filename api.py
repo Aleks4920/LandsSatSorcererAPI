@@ -7,6 +7,17 @@ import odc.stac
 import matplotlib.pyplot as plt
 import os
 
+
+# delete previous png files
+# delete natural_color_image.png
+if os.path.exists("natural_color_image.png"):
+    os.remove("natural_color_image.png")
+    
+# delete ndvi_image.png
+if os.path.exists("ndvi_image.png"):
+    os.remove("ndvi_image.png")
+    
+
 # Set matplotlib to use the 'Agg' backend for non-interactive environments
 plt.switch_backend('Agg')
 
@@ -97,6 +108,12 @@ def generate_images(
     return {
         "natural_color_image": f"/download-image/{natural_color_path}",
         "ndvi_image": f"/download-image/{ndvi_image_path}",
+        # return data information
+        "selected_item_id": selected_item.id,
+        "selected_item_datetime": selected_item.datetime.date(),
+        "selected_item_cloud_cover": selected_item.properties["eo:cloud_cover"],
+        "bbox_of_interest": bbox_of_interest,
+        
     }
 
 
